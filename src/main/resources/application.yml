@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: book-catalog
+server:
+  port: 8081
+app:
+  welcome-text: I am ready to learn Spring Boot from basic to advanced
+  timezone: Asia/Jakarta
+  currency: IDR
+---
+spring:
+  config:
+    activate:
+      on-profile: development
+app:
+  welcome-text: I am from development profile
+  timezone: Asia/Tokyo
+  currency: JPY
+---
+spring:
+  config:
+    activate:
+      on-profile: staging
+app:
+  welcome-text: I am from staging profile
+  timezone: Europe/Spain
+  currency: EUR
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+app:
+  welcome-text: ${WELCOME_TEXT}
+  timezone: ${TIMEZONE}
+  currency: ${CURRENCY}
