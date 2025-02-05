@@ -1,22 +1,17 @@
 package com.gustionusamba.bookcatalog.web;
 
 import com.gustionusamba.bookcatalog.service.GreetingService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
+@RequiredArgsConstructor
 public class HelloResource {
 
-    Logger log = LoggerFactory.getLogger(HelloResource.class);
-
     private final GreetingService greetingService;
-
-    public HelloResource(GreetingService greetingService) {
-        super();
-        this.greetingService = greetingService;
-    }
 
     @GetMapping("/hello")
     public String helloWorld() {
