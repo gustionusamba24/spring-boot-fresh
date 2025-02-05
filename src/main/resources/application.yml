@@ -9,9 +9,9 @@ app:
   currency: IDR
 logging:
   level:
-    org:
-      springframework:
-        web: debug
+    com:
+      gustionusamba:
+        bookcatalog: error
 ---
 spring:
   config:
