@@ -7,6 +7,11 @@ app:
   welcome-text: I am ready to learn Spring Boot from basic to advanced
   timezone: Asia/Jakarta
   currency: IDR
+logging:
+  level:
+    org:
+      springframework:
+        web: debug
 ---
 spring:
   config:
