@@ -10,6 +10,8 @@ public class HomeController {
     @GetMapping("/home") // this approach is pretty simple
 //    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String home(Model model) {
+        model.addAttribute("name", "Lunox Sanjaya");
+        model.addAttribute("address", "Surabaya");
         return "home";
     }
 }

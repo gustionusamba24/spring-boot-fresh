@@ -1,11 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <title>Home</title>
   </head>
   <body>
     <h1>Home Page</h1>
-    <p>Welcome back Mr. Alucard. This is our home page</p>
+    <p>
+      Welcome back Mr. <span th:text="${name}"></span> This is our home page.
+      You are now in <span th:text="${address}"></span>.
+    </p>
   </body>
 </html>
