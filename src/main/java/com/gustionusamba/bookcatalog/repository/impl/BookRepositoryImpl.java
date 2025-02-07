@@ -24,4 +24,11 @@ public class BookRepositoryImpl implements BookRepository {
         List<Book> bookList = new ArrayList<Book>(bookMap.values());
         return bookList;
     }
+
+    @Override
+    public void save(Book book) {
+        int bookSize = bookMap.size();
+        book.setId((long) bookSize + 1);
+        bookMap.put(book.getId(), book);
+    }
 }

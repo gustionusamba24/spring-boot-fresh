@@ -1,6 +1,8 @@
 package com.gustionusamba.bookcatalog.service.impl;
 
+import com.gustionusamba.bookcatalog.domain.Author;
 import com.gustionusamba.bookcatalog.domain.Book;
+import com.gustionusamba.bookcatalog.dto.BookCreateDTO;
 import com.gustionusamba.bookcatalog.dto.BookDetailDTO;
 import com.gustionusamba.bookcatalog.repository.BookRepository;
 import com.gustionusamba.bookcatalog.service.BookService;
@@ -38,5 +40,17 @@ public class BookServiceImpl implements BookService {
             dto.setAuthorName(book.getAuthor().getName());
             return dto;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public void createNewBook(BookCreateDTO dto) {
+        Author author = new Author();
+        author.setName(dto.getAuthorName());
+
+        Book book = new Book();
+        book.setAuthor(author);
+        book.setTitle(dto.getBookTitle());
+        book.setDescription(dto.getBookDescription());
+        bookRepository.save(book);
     }
 }

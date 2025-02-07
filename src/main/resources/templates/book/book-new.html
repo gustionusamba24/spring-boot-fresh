@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>List of Book</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: inherit;
+      }
+
+      html {
+        font-size: 62.5%;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Inter, sans-serif;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+      }
+
+      table {
+        font-size: 1.5rem;
+        border-collapse: collapse;
+      }
+
+      td,
+      th {
+        padding: 1rem;
+      }
+
+      input,
+      textarea {
+        font-family: inherit;
+        font-size: inherit;
+      }
+
+      textarea {
+        resize: none;
+      }
+
+      button {
+        font-family: inherit;
+        font-size: 1.5rem;
+        padding: 0.7rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        background-color: royalblue;
+        color: #fff;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Create new book</h1>
+    <form method="post" th:action="@{/book/new}" th:object="${bookCreateDTO}">
+      <table>
+        <tr>
+          <td><label for="title">Title :</label></td>
+          <td>:</td>
+          <td>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              th:field="*{bookTitle}"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="author">Author</label></td>
+          <td>:</td>
+          <td>
+            <input
+              type="text"
+              name="author"
+              id="author"
+              th:field="*{authorName}"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="description">Description</label></td>
+          <td>:</td>
+          <td>
+            <textarea
+              name="description"
+              id="description"
+              cols="30"
+              rows="10"
+              th:field="*{bookDescription}"
+            ></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" style="text-align: right">
+            <button type="submit">Submit</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>
