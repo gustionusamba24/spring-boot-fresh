@@ -7,6 +7,9 @@ import com.gustionusamba.bookcatalog.service.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @AllArgsConstructor
 @Service("bookService")
 public class BookServiceImpl implements BookService {
@@ -22,5 +25,18 @@ public class BookServiceImpl implements BookService {
         dto.setBookDescription(book.getDescription());
         dto.setAuthorName(book.getAuthor().getName());
         return dto;
+    }
+
+    @Override
+    public List<BookDetailDTO> findBookListDetail() {
+        List<Book> books = bookRepository.findAll();
+        return books.stream().map(book -> {
+            BookDetailDTO dto = new BookDetailDTO();
+            dto.setBookId(book.getId());
+            dto.setBookTitle(book.getTitle());
+            dto.setBookDescription(book.getDescription());
+            dto.setAuthorName(book.getAuthor().getName());
+            return dto;
+        }).collect(Collectors.toList());
     }
 }
