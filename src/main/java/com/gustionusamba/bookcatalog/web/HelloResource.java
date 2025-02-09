@@ -4,6 +4,7 @@ import com.gustionusamba.bookcatalog.dto.HelloMessageResponseDTO;
 import com.gustionusamba.bookcatalog.service.GreetingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,7 @@ public class HelloResource {
     private final GreetingService greetingService;
 
     @GetMapping("/hello")
-    public HelloMessageResponseDTO helloWorld() {
+    public ResponseEntity<HelloMessageResponseDTO> helloWorld() {
         log.error("This is error message");
         log.warn("This is warn message");
         log.info("This is info message");
@@ -24,6 +25,6 @@ public class HelloResource {
 
         HelloMessageResponseDTO dto = new HelloMessageResponseDTO();
         dto.setMessage(greetingService.sayGreeting());
-        return dto;
+        return ResponseEntity.ok().body(dto);
     }
 }
