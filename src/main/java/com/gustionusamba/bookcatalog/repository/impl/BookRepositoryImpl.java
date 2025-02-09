@@ -36,4 +36,9 @@ public class BookRepositoryImpl implements BookRepository {
     public void update(Book book) {
         bookMap.put(book.getId(), book);
     }
+
+    @Override
+    public void delete(Long id) {
+        bookMap.remove(id);
+    }
 }

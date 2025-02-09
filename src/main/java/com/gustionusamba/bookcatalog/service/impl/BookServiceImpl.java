@@ -62,4 +62,9 @@ public class BookServiceImpl implements BookService {
         book.setDescription(dto.getBookDescription());
         bookRepository.update(book);
     }
+
+    @Override
+    public void deleteBook(Long bookId) {
+        bookRepository.delete(bookId);
+    }
 }
