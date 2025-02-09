@@ -2,6 +2,7 @@ package com.gustionusamba.bookcatalog.web;
 
 import com.gustionusamba.bookcatalog.dto.BookCreateDTO;
 import com.gustionusamba.bookcatalog.dto.BookDetailDTO;
+import com.gustionusamba.bookcatalog.dto.BookUpdateDTO;
 import com.gustionusamba.bookcatalog.service.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,11 @@ public class BookResource {
     @GetMapping("/book")
     public ResponseEntity<List<BookDetailDTO>> findBookList() {
         return ResponseEntity.ok().body(bookService.findBookListDetail());
+    }
+
+    @PutMapping("/book/{bookId}")
+    public ResponseEntity<Void> updateBook(@PathVariable("bookId") Long bookId, @RequestBody BookUpdateDTO dto) {
+        bookService.updateBook(bookId, dto);
+        return ResponseEntity.ok().build();
     }
 }

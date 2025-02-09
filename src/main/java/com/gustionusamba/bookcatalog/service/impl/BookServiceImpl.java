@@ -4,6 +4,7 @@ import com.gustionusamba.bookcatalog.domain.Author;
 import com.gustionusamba.bookcatalog.domain.Book;
 import com.gustionusamba.bookcatalog.dto.BookCreateDTO;
 import com.gustionusamba.bookcatalog.dto.BookDetailDTO;
+import com.gustionusamba.bookcatalog.dto.BookUpdateDTO;
 import com.gustionusamba.bookcatalog.repository.BookRepository;
 import com.gustionusamba.bookcatalog.service.BookService;
 import lombok.AllArgsConstructor;
@@ -52,5 +53,13 @@ public class BookServiceImpl implements BookService {
         book.setTitle(dto.getBookTitle());
         book.setDescription(dto.getBookDescription());
         bookRepository.save(book);
+    }
+
+    @Override
+    public void updateBook(Long bookId, BookUpdateDTO dto) {
+        Book book = bookRepository.findBookById(bookId);
+        book.setTitle(dto.getBookTitle());
+        book.setDescription(dto.getBookDescription());
+        bookRepository.update(book);
     }
 }
