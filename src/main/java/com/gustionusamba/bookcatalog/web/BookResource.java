@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -25,5 +26,10 @@ public class BookResource {
     public ResponseEntity<Void> createANewBook(@RequestBody BookCreateDTO dto) {
         bookService.createNewBook(dto);
         return ResponseEntity.created(URI.create("/book")).build();
+    }
+
+    @GetMapping("/book")
+    public ResponseEntity<List<BookDetailDTO>> findBookList() {
+        return ResponseEntity.ok().body(bookService.findBookListDetail());
     }
 }
