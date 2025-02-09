@@ -1,11 +1,13 @@
 package com.gustionusamba.bookcatalog.web;
 
+import com.gustionusamba.bookcatalog.dto.BookCreateDTO;
 import com.gustionusamba.bookcatalog.dto.BookDetailDTO;
 import com.gustionusamba.bookcatalog.service.BookService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @AllArgsConstructor
 @RestController
@@ -19,4 +21,9 @@ public class BookResource {
         return result;
     }
 
+    @PostMapping("/book")
+    public ResponseEntity<Void> createANewBook(@RequestBody BookCreateDTO dto) {
+        bookService.createNewBook(dto);
+        return ResponseEntity.created(URI.create("/book")).build();
+    }
 }
