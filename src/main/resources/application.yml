@@ -1,6 +1,24 @@
 spring:
   application:
     name: book-catalog
+  datasource:
+    hikari:
+      connection-timeout: 600000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+    url: jdbc:postgresql://localhost:5431/book_catalog
+    username: gustionusamba
+    password: gustionusamba
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
 server:
   port: 8081
 app:
@@ -12,6 +30,7 @@ logging:
     com:
       gustionusamba:
         bookcatalog: error
+
 ---
 spring:
   config:
@@ -21,6 +40,7 @@ app:
   welcome-text: I am from development profile
   timezone: Asia/Tokyo
   currency: JPY
+
 ---
 spring:
   config:
@@ -30,6 +50,7 @@ app:
   welcome-text: I am from staging profile
   timezone: Europe/Spain
   currency: EUR
+
 ---
 spring:
   config:
