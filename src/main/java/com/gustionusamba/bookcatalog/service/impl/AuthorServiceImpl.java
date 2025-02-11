@@ -1,12 +1,15 @@
 package com.gustionusamba.bookcatalog.service.impl;
 
 import com.gustionusamba.bookcatalog.domain.Author;
+import com.gustionusamba.bookcatalog.dto.AuthorCreateDTO;
 import com.gustionusamba.bookcatalog.dto.AuthorResponseDTO;
 import com.gustionusamba.bookcatalog.exception.BadRequestException;
 import com.gustionusamba.bookcatalog.repository.AuthorRepository;
 import com.gustionusamba.bookcatalog.service.AuthorService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @Service("authorService")
@@ -24,5 +27,15 @@ public class AuthorServiceImpl implements AuthorService {
         dto.setAuthorName(author.getName());
         dto.setBirthDate(author.getBirthDate().toEpochDay());
         return dto;
+    }
+
+    @Override
+    public void createNewAuthor(AuthorCreateDTO dto) {
+
+        Author author = new Author();
+        author.setName(dto.getAuthorName());
+        author.setBirthDate(LocalDate.ofEpochDay(dto.getBirthDate()));
+
+        authorRepository.save(author);
     }
 }
