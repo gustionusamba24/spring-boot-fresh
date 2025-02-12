@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service("authorService")
@@ -29,13 +31,18 @@ public class AuthorServiceImpl implements AuthorService {
         return dto;
     }
 
+
     @Override
-    public void createNewAuthor(AuthorCreateDTO dto) {
+    public void createNewAuthor(List<AuthorCreateDTO> dtos) {
 
-        Author author = new Author();
-        author.setName(dto.getAuthorName());
-        author.setBirthDate(LocalDate.ofEpochDay(dto.getBirthDate()));
+        List<Author> authors = dtos.stream().map((dto) -> {
+            Author author = new Author();
+            author.setName(dto.getAuthorName());
+            author.setBirthDate(LocalDate.ofEpochDay(dto.getBirthDate()));
+            return author;
+        }).collect(Collectors.toList());
 
-        authorRepository.save(author);
+
+        authorRepository.saveAll(authors);
     }
 }
