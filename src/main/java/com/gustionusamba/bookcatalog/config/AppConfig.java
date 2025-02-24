@@ -1,14 +1,15 @@
 package com.gustionusamba.bookcatalog.config;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import com.gustionusamba.bookcatalog.domain.Author;
 import com.gustionusamba.bookcatalog.domain.Book;
 import com.gustionusamba.bookcatalog.repository.BookRepository;
 import com.gustionusamba.bookcatalog.repository.impl.BookRepositoryImpl;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 public class AppConfig {
@@ -40,7 +41,7 @@ public class AppConfig {
 
     @Bean
     public BookRepository bookRepository(Book book1, Book book2) {
-        Map<Long, Book> bookMap = new HashMap<Long, Book>();
+        Map<Long, Book> bookMap = new HashMap<>();
         bookMap.put(1L, book1);
         bookMap.put(2L, book2);
 
