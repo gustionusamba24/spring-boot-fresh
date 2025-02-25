@@ -14,6 +14,11 @@ import java.time.LocalDate;
 @Table(name = "author")
 public class Author {
 
+    // postgre -> bigserial
+    // mysql -> autoincrement
+    // strategy -> identity -> cons: batch insert is disabled
+    // strategy -> sequence -> pros: batch insert is enabled
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     // @SequenceGenerator(name = "author_generator", sequenceName = "author_id_seq")
