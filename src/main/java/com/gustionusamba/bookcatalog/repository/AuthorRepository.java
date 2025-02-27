@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @Override
-    public Optional<Author> findById(Long id);
+    Optional<Author> findById(Long id);
 
-    public List<Author> findByNameLike(String authorName);
+    List<Author> findByNameLike(String authorName);
 }

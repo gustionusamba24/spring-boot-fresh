@@ -2,6 +2,7 @@ package com.gustionusamba.bookcatalog.web;
 
 import com.gustionusamba.bookcatalog.dto.AuthorCreateDTO;
 import com.gustionusamba.bookcatalog.dto.AuthorResponseDTO;
+import com.gustionusamba.bookcatalog.dto.AuthorUpdateDTO;
 import com.gustionusamba.bookcatalog.service.AuthorService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -26,5 +27,12 @@ public class AuthorResource {
     public ResponseEntity<Void> createANewAuthor(@RequestBody @Valid List<AuthorCreateDTO> dto) {
         authorService.createNewAuthor(dto);
         return ResponseEntity.created(URI.create("/author")).build();
+    }
+
+    @PutMapping("/author/{authorId}")
+    public ResponseEntity<Void> updateAuthor(@PathVariable("authorId") Long authorId,
+                                             @RequestBody AuthorUpdateDTO dto) {
+        authorService.updateAuthor(authorId, dto);
+        return ResponseEntity.ok().build();
     }
 }

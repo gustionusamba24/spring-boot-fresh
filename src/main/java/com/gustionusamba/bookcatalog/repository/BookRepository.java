@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface BookRepository {
 
-    public Book findBookById(Long id);
+    Book findBookById(Long id);
 
-    public List<Book> findAll();
+    List<Book> findAll();
 
-    public void save(Book book);
+    void save(Book book);
 
-    public void update(Book book);
+    void update(Book book);
 
-    public void delete(Long id);
+    void delete(Long id);
 }

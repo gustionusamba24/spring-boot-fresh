@@ -2,12 +2,15 @@ package com.gustionusamba.bookcatalog.service;
 
 import com.gustionusamba.bookcatalog.dto.AuthorCreateDTO;
 import com.gustionusamba.bookcatalog.dto.AuthorResponseDTO;
+import com.gustionusamba.bookcatalog.dto.AuthorUpdateDTO;
 
 import java.util.List;
 
 public interface AuthorService {
 
-    public AuthorResponseDTO findAuthorById(Long id);
+    AuthorResponseDTO findAuthorById(Long id);
 
-    public void createNewAuthor(List<AuthorCreateDTO> dto);
+    void createNewAuthor(List<AuthorCreateDTO> dto);
+
+    void updateAuthor(Long authorId, AuthorUpdateDTO dto);
 }

@@ -3,6 +3,7 @@ package com.gustionusamba.bookcatalog.service.impl;
 import com.gustionusamba.bookcatalog.domain.Author;
 import com.gustionusamba.bookcatalog.dto.AuthorCreateDTO;
 import com.gustionusamba.bookcatalog.dto.AuthorResponseDTO;
+import com.gustionusamba.bookcatalog.dto.AuthorUpdateDTO;
 import com.gustionusamba.bookcatalog.exception.BadRequestException;
 import com.gustionusamba.bookcatalog.repository.AuthorRepository;
 import com.gustionusamba.bookcatalog.service.AuthorService;
@@ -31,7 +32,6 @@ public class AuthorServiceImpl implements AuthorService {
         return dto;
     }
 
-
     @Override
     public void createNewAuthor(List<AuthorCreateDTO> dtos) {
 
@@ -42,7 +42,17 @@ public class AuthorServiceImpl implements AuthorService {
             return author;
         }).collect(Collectors.toList());
 
-
         authorRepository.saveAll(authors);
+    }
+
+    @Override
+    public void updateAuthor(Long authorId, AuthorUpdateDTO dto) {
+        Author author = authorRepository.findById(authorId)
+                .orElseThrow(() -> new BadRequestException("Invalid author ID"));
+        author.setName(dto.getAuthorName() == null ? author.getName() : dto.getAuthorName());
+        author.setBirthDate(
+                dto.getBirthDate() == null ? author.getBirthDate() : LocalDate.ofEpochDay(dto.getBirthDate()));
+
+        authorRepository.save(author);
     }
 }
