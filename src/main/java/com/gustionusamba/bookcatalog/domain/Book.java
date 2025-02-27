@@ -4,13 +4,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serial;
-import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "book")
-public class Book implements Serializable {
+public class Book extends AbstractBasedEntity {
 
     @Serial
     private static final long serialVersionUID = -4883238118080083787L;

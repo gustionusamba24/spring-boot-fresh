@@ -4,16 +4,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serial;
-import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "publisher")
-public class Publisher implements Serializable {
+public class Publisher extends AbstractBasedEntity {
 
     @Serial
-    private static final long serialVersionUID = -1949166665762955562L;
+    private static final long serialVersionUID = -672114490629015344L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "publisher_generator")
