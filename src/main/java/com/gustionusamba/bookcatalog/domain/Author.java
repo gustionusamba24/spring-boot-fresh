@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
@@ -17,16 +19,19 @@ import java.time.LocalDate;
 //@DynamicUpdate
 @SQLDelete(sql = "UPDATE author SET deleted = true WHERE id = ?")
 @Where(clause = "deleted=false")
-public class Author {
+public class Author implements Serializable {
+
 
     // postgre -> bigserial
     // mysql -> autoincrement
     // strategy -> identity -> cons: batch insert is disabled
     // strategy -> sequence -> pros: batch insert is enabled
+    @Serial
+    private static final long serialVersionUID = 8325610420618095568L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    // @SequenceGenerator(name = "author_generator", sequenceName = "author_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "author_generator")
+    @SequenceGenerator(name = "author_generator", sequenceName = "author_id_seq")
     private Long id;
 
     @Column(name = "author_name", nullable = false, columnDefinition = "varchar(300)")
