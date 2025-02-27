@@ -1,22 +1,21 @@
 package com.gustionusamba.bookcatalog.config;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 import com.gustionusamba.bookcatalog.domain.Author;
 import com.gustionusamba.bookcatalog.domain.Book;
 import com.gustionusamba.bookcatalog.repository.BookRepository;
 import com.gustionusamba.bookcatalog.repository.impl.BookRepositoryImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class AppConfig {
 
     @Bean
     public Author author() {
-        return new Author(1L, "Pramoedya Ananta Toer", null);
+        return new Author(1L, "Pramoedya Ananta Toer", null, false);
     }
 
     @Bean
