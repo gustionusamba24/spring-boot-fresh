@@ -61,6 +61,6 @@ public class PublisherServiceImpl implements PublisherService {
             dto.setCompanyName(p.getCompanyName());
             return dto;
         }).collect(Collectors.toList());
-        return PaginationUtil.createResultPageDTO(dtos, pageResult.getTotalElements(), (long) pageResult.getTotalPages());
+        return PaginationUtil.createResultPageDTO(dtos, pageResult.getTotalElements(), pageResult.getTotalPages());
     }
 }

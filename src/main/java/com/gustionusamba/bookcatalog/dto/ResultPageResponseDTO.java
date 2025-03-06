@@ -17,7 +17,7 @@ public class ResultPageResponseDTO<T> implements Serializable {
 
     private List<T> result;
 
-    private Long pages;
+    private Integer pages;
 
     private Long elements;
 }

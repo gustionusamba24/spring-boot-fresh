@@ -7,7 +7,7 @@ import java.util.List;
 
 public class PaginationUtil {
 
-    public static <T> ResultPageResponseDTO<T> createResultPageDTO(List<T> dtos, Long totalElements, Long pages) {
+    public static <T> ResultPageResponseDTO<T> createResultPageDTO(List<T> dtos, Long totalElements, Integer pages) {
         ResultPageResponseDTO<T> result = new ResultPageResponseDTO<>();
         result.setPages(pages);
         result.setElements(totalElements);
