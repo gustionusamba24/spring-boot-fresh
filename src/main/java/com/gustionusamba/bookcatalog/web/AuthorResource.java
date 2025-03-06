@@ -4,7 +4,6 @@ import com.gustionusamba.bookcatalog.dto.AuthorCreateDTO;
 import com.gustionusamba.bookcatalog.dto.AuthorResponseDTO;
 import com.gustionusamba.bookcatalog.dto.AuthorUpdateDTO;
 import com.gustionusamba.bookcatalog.service.AuthorService;
-import com.gustionusamba.bookcatalog.service.impl.BookServiceImpl;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import java.util.List;
 public class AuthorResource {
 
     private final AuthorService authorService;
-    private final BookServiceImpl bookService;
 
     @GetMapping("/author/{id}/detail")
     public ResponseEntity<AuthorResponseDTO> getAuthorById(@PathVariable("id") Long id) {
