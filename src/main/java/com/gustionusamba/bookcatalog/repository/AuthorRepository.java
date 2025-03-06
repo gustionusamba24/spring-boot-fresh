@@ -11,6 +11,8 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Override
     Optional<Author> findById(Long id);
 
+    Optional<Author> findBySecureId(String id);
+
     List<Author> findByNameLike(String authorName);
 
     Optional<Author> findByIdAndDeletedFalse(Long id);

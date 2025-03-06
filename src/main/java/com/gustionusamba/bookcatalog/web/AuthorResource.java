@@ -18,26 +18,26 @@ public class AuthorResource {
 
     private final AuthorService authorService;
 
-    @GetMapping("/author/{id}/detail")
-    public ResponseEntity<AuthorResponseDTO> getAuthorById(@PathVariable("id") Long id) {
+    @GetMapping("/v1/author/{id}/detail")
+    public ResponseEntity<AuthorResponseDTO> getAuthorById(@PathVariable("id") String id) {
         return ResponseEntity.ok().body(authorService.findAuthorById(id));
     }
 
-    @PostMapping("/author")
+    @PostMapping("/v1/author")
     public ResponseEntity<Void> createANewAuthor(@RequestBody @Valid List<AuthorCreateDTO> dto) {
         authorService.createNewAuthor(dto);
         return ResponseEntity.created(URI.create("/author")).build();
     }
 
-    @PutMapping("/author/{authorId}")
-    public ResponseEntity<Void> updateAuthor(@PathVariable("authorId") Long authorId,
+    @PutMapping("/v1/author/{authorId}")
+    public ResponseEntity<Void> updateAuthor(@PathVariable("authorId") String authorId,
                                              @RequestBody AuthorUpdateDTO dto) {
         authorService.updateAuthor(authorId, dto);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/author/{authorId}")
-    public ResponseEntity<Void> deleteAuthor(@PathVariable("authorId") Long authorId) {
+    @DeleteMapping("/v1/author/{authorId}")
+    public ResponseEntity<Void> deleteAuthor(@PathVariable("authorId") String authorId) {
         authorService.deleteAuthor(authorId);
         return ResponseEntity.ok().build();
     }
