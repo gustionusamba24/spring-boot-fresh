@@ -3,6 +3,7 @@ package com.gustionusamba.bookcatalog.service.impl;
 import com.gustionusamba.bookcatalog.domain.Author;
 import com.gustionusamba.bookcatalog.domain.Book;
 import com.gustionusamba.bookcatalog.domain.Category;
+import com.gustionusamba.bookcatalog.domain.Publisher;
 import com.gustionusamba.bookcatalog.dto.BookCreateDTO;
 import com.gustionusamba.bookcatalog.dto.BookDetailDTO;
 import com.gustionusamba.bookcatalog.dto.BookUpdateDTO;
@@ -11,6 +12,7 @@ import com.gustionusamba.bookcatalog.repository.BookRepository;
 import com.gustionusamba.bookcatalog.service.AuthorService;
 import com.gustionusamba.bookcatalog.service.BookService;
 import com.gustionusamba.bookcatalog.service.CategoryService;
+import com.gustionusamba.bookcatalog.service.PublisherService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,8 @@ public class BookServiceImpl implements BookService {
     private final AuthorService authorService;
 
     private final CategoryService categoryService;
+
+    private final PublisherService publisherService;
 
     @Override
     public BookDetailDTO findBookDetailById(Long bookId) {
@@ -55,10 +59,12 @@ public class BookServiceImpl implements BookService {
     public void createNewBook(BookCreateDTO dto) {
         List<Author> authors = authorService.findAuthors(dto.getAuthorIdList());
         List<Category> categories = categoryService.findCategories(dto.getCategoryList());
+        Publisher publisher = publisherService.findPublisher(dto.getPublisherId());
 
         Book book = new Book();
         book.setAuthors(authors);
         book.setCategories(categories);
+        book.setPublisher(publisher);
         book.setTitle(dto.getBookTitle());
         book.setDescription(dto.getBookDescription());
         bookRepository.save(book);

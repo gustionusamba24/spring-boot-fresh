@@ -38,7 +38,8 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     public void updatePublisher(String publisherId, PublisherUpdateDTO dto) {
-        Publisher publisher = publisherRepository.findBySecureId(publisherId).orElseThrow(() -> new BadRequestException("Invalid publisher id"));
+        Publisher publisher = publisherRepository.findBySecureId(publisherId)
+                .orElseThrow(() -> new BadRequestException("Invalid publisher id"));
 
         publisher.setName(dto.getPublisherName() == null || dto.getPublisherName().isBlank() ? publisher.getName() : dto.getPublisherName());
         publisher.setCompanyName(dto.getCompanyName() == null || dto.getCompanyName().isBlank() ? publisher.getCompanyName() : dto.getCompanyName());
@@ -62,5 +63,11 @@ public class PublisherServiceImpl implements PublisherService {
             return dto;
         }).collect(Collectors.toList());
         return PaginationUtil.createResultPageDTO(dtos, pageResult.getTotalElements(), pageResult.getTotalPages());
+    }
+
+    @Override
+    public Publisher findPublisher(String publisherId) {
+        return publisherRepository.findBySecureId(publisherId)
+                .orElseThrow(() -> new BadRequestException("Invalid publisher id"));
     }
 }
