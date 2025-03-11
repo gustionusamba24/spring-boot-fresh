@@ -60,4 +60,15 @@ public class CategoryServiceImpl implements CategoryService {
         if (categories.isEmpty()) throw new BadRequestException("category can not be empty");
         return categories;
     }
+
+    @Override
+    public List<CategoryListResponseDTO> constructDTO(List<Category> categories) {
+        return categories.stream().map((c) -> {
+            CategoryListResponseDTO dto = new CategoryListResponseDTO();
+            dto.setCode(c.getCode());
+            dto.setName(c.getName());
+            dto.setDescription(c.getDescription());
+            return dto;
+        }).collect(Collectors.toList());
+    }
 }

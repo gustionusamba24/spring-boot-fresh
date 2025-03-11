@@ -17,30 +17,30 @@ public class BookResource {
 
     private final BookService bookService;
 
-    @GetMapping("/book/{bookId}")
-    public BookDetailDTO findBookDetail(@PathVariable("bookId") Long id) {
-        BookDetailDTO result = bookService.findBookDetailById(id);
-        return result;
+    @GetMapping("/v1/book/{bookId}")
+    public BookDetailDTO findBookDetail(@PathVariable("bookId") String id) {
+        return bookService.findBookDetailById(id);
+
     }
 
-    @PostMapping("/book")
+    @PostMapping("/v1/book")
     public ResponseEntity<Void> createANewBook(@RequestBody BookCreateDTO dto) {
         bookService.createNewBook(dto);
         return ResponseEntity.created(URI.create("/book")).build();
     }
 
-    @GetMapping("/book")
+    @GetMapping("/v1/book")
     public ResponseEntity<List<BookDetailDTO>> findBookList() {
         return ResponseEntity.ok().body(bookService.findBookListDetail());
     }
 
-    @PutMapping("/book/{bookId}")
+    @PutMapping("/v1/book/{bookId}")
     public ResponseEntity<Void> updateBook(@PathVariable("bookId") Long bookId, @RequestBody BookUpdateDTO dto) {
         bookService.updateBook(bookId, dto);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/book/{bookId}")
+    @DeleteMapping("/v1/book/{bookId}")
     public ResponseEntity<Void> deleteBook(@PathVariable("bookId") Long bookId) {
         bookService.deleteBook(bookId);
         return ResponseEntity.ok().build();

@@ -15,4 +15,6 @@ public interface CategoryService {
                                                                  String direction, String categoryName);
 
     List<Category> findCategories(List<String> categoryCodeList);
+
+    List<CategoryListResponseDTO> constructDTO(List<Category> categories);
 }

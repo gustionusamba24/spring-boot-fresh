@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BookService {
 
-    BookDetailDTO findBookDetailById(Long bookId);
+    BookDetailDTO findBookDetailById(String bookId);
 
     List<BookDetailDTO> findBookListDetail();
 

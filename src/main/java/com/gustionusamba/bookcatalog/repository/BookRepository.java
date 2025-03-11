@@ -20,4 +20,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Override
     Optional<Book> findById(Long id);
+
+    Optional<Book> findBySecureId(String bookId);
 }

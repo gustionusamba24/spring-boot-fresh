@@ -32,10 +32,12 @@ public class BookServiceImpl implements BookService {
     private final PublisherService publisherService;
 
     @Override
-    public BookDetailDTO findBookDetailById(Long bookId) {
-        Book book = bookRepository.findById(bookId).orElseThrow(() -> new BadRequestException("Invalid book id"));
+    public BookDetailDTO findBookDetailById(String bookId) {
+        Book book = bookRepository.findBySecureId(bookId).orElseThrow(() -> new BadRequestException("Invalid book id"));
         BookDetailDTO dto = new BookDetailDTO();
-        dto.setBookId(book.getId());
+        dto.setBookId(book.getSecureId());
+        dto.setCategories(categoryService.constructDTO(book.getCategories()));
+        dto.setAuthors(authorService.constructDTO(book.getAuthors()));
         dto.setBookTitle(book.getTitle());
         dto.setBookDescription(book.getDescription());
 //        dto.setAuthorName(book.getAuthor().getName());
@@ -47,10 +49,10 @@ public class BookServiceImpl implements BookService {
         List<Book> books = bookRepository.findAll();
         return books.stream().map(book -> {
             BookDetailDTO dto = new BookDetailDTO();
-            dto.setBookId(book.getId());
+            dto.setBookId(book.getSecureId());
             dto.setBookTitle(book.getTitle());
             dto.setBookDescription(book.getDescription());
-//            dto.setAuthorName(book.getAuthor().getName());
+            // dto.setAuthorName(book.getAuthor().getName());
             return dto;
         }).collect(Collectors.toList());
     }
