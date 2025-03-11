@@ -8,8 +8,9 @@ import java.util.Optional;
 
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    @Override
     Optional<Author> findById(Long id);
+
+    List<Author> findBySecureIdIn(List<String> authorIdList);
 
     Optional<Author> findBySecureId(String id);
 

@@ -4,6 +4,7 @@ import com.gustionusamba.bookcatalog.domain.Category;
 import com.gustionusamba.bookcatalog.dto.CategoryCreateUpdateDTO;
 import com.gustionusamba.bookcatalog.dto.CategoryListResponseDTO;
 import com.gustionusamba.bookcatalog.dto.ResultPageResponseDTO;
+import com.gustionusamba.bookcatalog.exception.BadRequestException;
 import com.gustionusamba.bookcatalog.repository.CategoryRepository;
 import com.gustionusamba.bookcatalog.service.CategoryService;
 import com.gustionusamba.bookcatalog.util.PaginationUtil;
@@ -51,5 +52,12 @@ public class CategoryServiceImpl implements CategoryService {
             return dto;
         }).collect(Collectors.toList());
         return PaginationUtil.createResultPageDTO(dtos, pageResult.getTotalElements(), pageResult.getTotalPages());
+    }
+
+    @Override
+    public List<Category> findCategories(List<String> categoryCodeList) {
+        List<Category> categories = categoryRepository.findByCodeIn(categoryCodeList);
+        if (categories.isEmpty()) throw new BadRequestException("category can not be empty");
+        return categories;
     }
 }
