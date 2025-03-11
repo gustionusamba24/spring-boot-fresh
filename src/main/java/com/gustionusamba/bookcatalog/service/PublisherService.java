@@ -1,10 +1,7 @@
 package com.gustionusamba.bookcatalog.service;
 
 import com.gustionusamba.bookcatalog.domain.Publisher;
-import com.gustionusamba.bookcatalog.dto.PublisherCreateDTO;
-import com.gustionusamba.bookcatalog.dto.PublisherListResponseDTO;
-import com.gustionusamba.bookcatalog.dto.PublisherUpdateDTO;
-import com.gustionusamba.bookcatalog.dto.ResultPageResponseDTO;
+import com.gustionusamba.bookcatalog.dto.*;
 
 public interface PublisherService {
 
@@ -16,4 +13,6 @@ public interface PublisherService {
                                                                   String direction, String publisherName);
 
     Publisher findPublisher(String publisherId);
+
+    PublisherResponseDTO constructDTO(Publisher publisher);
 }

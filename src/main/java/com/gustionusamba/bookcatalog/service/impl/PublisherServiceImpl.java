@@ -1,10 +1,7 @@
 package com.gustionusamba.bookcatalog.service.impl;
 
 import com.gustionusamba.bookcatalog.domain.Publisher;
-import com.gustionusamba.bookcatalog.dto.PublisherCreateDTO;
-import com.gustionusamba.bookcatalog.dto.PublisherListResponseDTO;
-import com.gustionusamba.bookcatalog.dto.PublisherUpdateDTO;
-import com.gustionusamba.bookcatalog.dto.ResultPageResponseDTO;
+import com.gustionusamba.bookcatalog.dto.*;
 import com.gustionusamba.bookcatalog.exception.BadRequestException;
 import com.gustionusamba.bookcatalog.repository.PublisherRepository;
 import com.gustionusamba.bookcatalog.service.PublisherService;
@@ -69,5 +66,13 @@ public class PublisherServiceImpl implements PublisherService {
     public Publisher findPublisher(String publisherId) {
         return publisherRepository.findBySecureId(publisherId)
                 .orElseThrow(() -> new BadRequestException("Invalid publisher id"));
+    }
+
+    @Override
+    public PublisherResponseDTO constructDTO(Publisher publisher) {
+        PublisherResponseDTO dto = new PublisherResponseDTO();
+        dto.setPublisherId(publisher.getSecureId());
+        dto.setPublisherName(publisher.getName());
+        return dto;
     }
 }

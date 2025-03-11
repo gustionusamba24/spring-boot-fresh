@@ -18,8 +18,9 @@ public class BookResource {
     private final BookService bookService;
 
     @GetMapping("/v1/book/{bookId}")
-    public BookDetailDTO findBookDetail(@PathVariable("bookId") String id) {
-        return bookService.findBookDetailById(id);
+    public ResponseEntity<BookDetailDTO> findBookDetail(@PathVariable("bookId") String id) {
+        BookDetailDTO result = bookService.findBookDetailById(id);
+        return ResponseEntity.ok(result);
 
     }
 
