@@ -15,7 +15,11 @@ public class LoggingAspect {
     private void restAPI() {
     }
 
-    @Before("restAPI()")
+    @Pointcut("within(com.gustionusamba.bookcatalog.web.*)")
+    private void withinPointcutExample() {
+    }
+
+    @Before("withinPointcutExample()")
     public void beforeExecutedLogging() {
         log.info("this is log from aspect");
     }
