@@ -59,7 +59,6 @@ public class LoggingAspect {
         try {
             log.info("start {}.{}", joinPoint.getTarget().getClass().getName(), joinPoint.getSignature().getName());
             stopWatch.start();
-            return joinPoint.proceed();
         } finally {
             stopWatch.stop();
             log.info("finish {}.{} execution time = {}",
@@ -67,5 +66,6 @@ public class LoggingAspect {
                     joinPoint.getSignature().getName(),
                     stopWatch.getTotalTimeMillis());
         }
+        return joinPoint.proceed();
     }
 }
