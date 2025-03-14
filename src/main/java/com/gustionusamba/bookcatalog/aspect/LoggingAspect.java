@@ -1,8 +1,10 @@
 package com.gustionusamba.bookcatalog.aspect;
 
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
 
 @Component
 @Slf4j
@@ -48,5 +50,22 @@ public class LoggingAspect {
     @AfterThrowing("annotationPointcutExample()")
     public void afterThrowingExecutedLogging() {
         log.info("this is log from aspect after throwing method executed");
+    }
+
+    @Around("restAPI()")
+    public Object processingTimeLogging(ProceedingJoinPoint joinPoint) throws Throwable {
+        StopWatch stopWatch = new StopWatch();
+
+        try {
+            log.info("start {}.{}", joinPoint.getTarget().getClass().getName(), joinPoint.getSignature().getName());
+            stopWatch.start();
+            return joinPoint.proceed();
+        } finally {
+            stopWatch.stop();
+            log.info("finish {}.{} execution time = {}",
+                    joinPoint.getTarget().getClass().getName(),
+                    joinPoint.getSignature().getName(),
+                    stopWatch.getTotalTimeMillis());
+        }
     }
 }
