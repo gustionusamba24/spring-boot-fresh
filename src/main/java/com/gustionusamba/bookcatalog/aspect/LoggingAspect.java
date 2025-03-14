@@ -27,7 +27,11 @@ public class LoggingAspect {
     private void argsAnnotationPointcutExample() {
     }
 
-    @Before("restAPI() && argsAnnotationPointcutExample()")
+    @Pointcut("@annotation(com.gustionusamba.bookcatalog.annotation.LogThisMethod)")
+    private void annotationPointcutExample() {
+    }
+
+    @Before("annotationPointcutExample()")
     public void beforeExecutedLogging() {
         log.info("this is log from aspect");
     }

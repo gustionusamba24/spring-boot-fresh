@@ -2,14 +2,13 @@ package com.gustionusamba.bookcatalog.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.gustionusamba.bookcatalog.annotation.LogThisArg;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
 
-@LogThisArg
+//@LogThisArg
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PublisherCreateDTO implements Serializable {

@@ -1,5 +1,6 @@
 package com.gustionusamba.bookcatalog.web;
 
+import com.gustionusamba.bookcatalog.annotation.LogThisMethod;
 import com.gustionusamba.bookcatalog.dto.PublisherCreateDTO;
 import com.gustionusamba.bookcatalog.dto.PublisherListResponseDTO;
 import com.gustionusamba.bookcatalog.dto.PublisherUpdateDTO;
@@ -30,6 +31,7 @@ public class PublisherResource {
         return ResponseEntity.ok().build();
     }
 
+    @LogThisMethod
     @GetMapping("/v1/publisher")
     public ResponseEntity<ResultPageResponseDTO<PublisherListResponseDTO>> getPublishers(@RequestParam(name = "pages", required = true, defaultValue = "0") Integer pages,
                                                                                          @RequestParam(name = "limit", required = true, defaultValue = "10") Integer limit,
