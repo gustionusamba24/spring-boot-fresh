@@ -5,6 +5,7 @@ import com.gustionusamba.bookcatalog.dto.AuthorCreateDTO;
 import com.gustionusamba.bookcatalog.dto.AuthorResponseDTO;
 import com.gustionusamba.bookcatalog.dto.AuthorUpdateDTO;
 import com.gustionusamba.bookcatalog.exception.BadRequestException;
+import com.gustionusamba.bookcatalog.exception.ResourceNotFoundException;
 import com.gustionusamba.bookcatalog.repository.AuthorRepository;
 import com.gustionusamba.bookcatalog.service.AuthorService;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class AuthorServiceImpl implements AuthorService {
     public AuthorResponseDTO findAuthorById(String id) {
         // TODO:
         // 1. fetch data from database
-        Author author = authorRepository.findBySecureId(id).orElseThrow(() -> new BadRequestException("Invalid author ID"));
+        Author author = authorRepository.findBySecureId(id).orElseThrow(() -> new ResourceNotFoundException("Invalid author ID"));
         // 2. map the data to AuthorResponseDTO
         AuthorResponseDTO dto = new AuthorResponseDTO();
         dto.setAuthorName(author.getName());
