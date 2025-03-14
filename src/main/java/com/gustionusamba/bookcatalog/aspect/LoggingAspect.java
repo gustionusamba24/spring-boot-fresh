@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LoggingAspect {
 
-    @Pointcut("execution(* com.gustionusamba.bookcatalog.web.*.*(com.gustionusamba.bookcatalog.dto.PublisherCreateDTO))")
+    @Pointcut("execution(* com.gustionusamba.bookcatalog.web.*.*(..))")
     private void restAPI() {
     }
 
@@ -23,7 +23,11 @@ public class LoggingAspect {
     private void argsPointcutExample() {
     }
 
-    @Before("restAPI()")
+    @Pointcut("@args(com.gustionusamba.bookcatalog.annotation.LogThisArg)")
+    private void argsAnnotationPointcutExample() {
+    }
+
+    @Before("restAPI() && argsAnnotationPointcutExample()")
     public void beforeExecutedLogging() {
         log.info("this is log from aspect");
     }
