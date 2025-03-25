@@ -24,6 +24,6 @@ public class PasswordEncryptedTest {
 
     @Test
     public void encryptPassword() {
-        log.info("Encrypted password: {}", passwordEncoder.encode("password"));
+        log.info("Encrypted password: {}", passwordEncoder.encode("12345678"));
     }
 }

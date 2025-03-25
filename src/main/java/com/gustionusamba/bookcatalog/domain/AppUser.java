@@ -21,6 +21,9 @@ public class AppUser extends AbstractBasedEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
+
     @Column(name = "username", nullable = false)
     private String username;
 
