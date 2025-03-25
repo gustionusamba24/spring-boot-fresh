@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -36,7 +36,7 @@ public class AppUser extends AbstractBasedEntity implements UserDetails {
                     @JoinColumn(name = "role_id", referencedColumnName = "id")
             }
     )
-    private List<Role> roles;
+    private Set<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

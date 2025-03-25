@@ -32,7 +32,7 @@ logging:
   level:
     com:
       gustionusamba:
-        bookcatalog: error
+        bookcatalog: info
 
 ---
 spring:

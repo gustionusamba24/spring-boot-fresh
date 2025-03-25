@@ -13,8 +13,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    private final AppUserService appUserService;
+
     @Autowired
-    private AppUserService appUserService;
+    public SecurityConfig(AppUserService appUserService) {
+        this.appUserService = appUserService;
+    }
 
     @Autowired
     void registerProvider(AuthenticationManagerBuilder auth, PasswordEncoder passwordEncoder) throws Exception {

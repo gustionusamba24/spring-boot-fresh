@@ -15,8 +15,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @Slf4j
 public class PasswordEncryptedTest {
 
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public PasswordEncryptedTest(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Test
     public void encryptPassword() {
