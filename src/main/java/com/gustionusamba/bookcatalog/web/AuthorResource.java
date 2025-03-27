@@ -7,6 +7,7 @@ import com.gustionusamba.bookcatalog.service.AuthorService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -18,11 +19,13 @@ public class AuthorResource {
 
     private final AuthorService authorService;
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/v1/author/{id}/detail")
     public ResponseEntity<AuthorResponseDTO> getAuthorById(@PathVariable("id") String id) {
         return ResponseEntity.ok().body(authorService.findAuthorById(id));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/v1/author")
     public ResponseEntity<Void> createANewAuthor(@RequestBody @Valid List<AuthorCreateDTO> dto) {
         authorService.createNewAuthor(dto);

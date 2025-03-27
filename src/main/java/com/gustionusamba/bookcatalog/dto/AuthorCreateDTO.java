@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AuthorCreateDTO {
@@ -15,4 +17,6 @@ public class AuthorCreateDTO {
 
     @NotNull
     private Long birthDate;
+
+    private List<AddressCreateRequestDTO> addresses;
 }

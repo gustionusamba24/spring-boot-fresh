@@ -1,5 +1,6 @@
 package com.gustionusamba.bookcatalog.service.impl;
 
+import com.gustionusamba.bookcatalog.domain.Address;
 import com.gustionusamba.bookcatalog.domain.Author;
 import com.gustionusamba.bookcatalog.dto.AuthorCreateDTO;
 import com.gustionusamba.bookcatalog.dto.AuthorResponseDTO;
@@ -40,6 +41,15 @@ public class AuthorServiceImpl implements AuthorService {
             Author author = new Author();
             author.setName(dto.getAuthorName());
             author.setBirthDate(LocalDate.ofEpochDay(dto.getBirthDate()));
+            List<Address> addresses = dto.getAddresses().stream().map(a -> {
+                Address address = new Address();
+                address.setStreetName(a.getStreetName());
+                address.setCityName(a.getCityName());
+                address.setZipCode(a.getZipCode());
+                address.setAuthor(author);
+                return address;
+            }).collect(Collectors.toList());
+            author.setAddresses(addresses);
             return author;
         }).collect(Collectors.toList());
 

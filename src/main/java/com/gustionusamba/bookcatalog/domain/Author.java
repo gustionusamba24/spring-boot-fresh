@@ -9,6 +9,7 @@ import org.hibernate.annotations.Where;
 
 import java.io.Serial;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -37,4 +38,7 @@ public class Author extends AbstractBasedEntity {
 
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Address> addresses;
 }
