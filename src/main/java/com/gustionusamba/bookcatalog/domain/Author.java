@@ -39,6 +39,6 @@ public class Author extends AbstractBasedEntity {
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.MERGE)
     private List<Address> addresses;
 }

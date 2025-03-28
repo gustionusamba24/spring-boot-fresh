@@ -32,6 +32,7 @@ public class AuthorResource {
         return ResponseEntity.created(URI.create("/author")).build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/v1/author/{authorId}")
     public ResponseEntity<Void> updateAuthor(@PathVariable("authorId") String authorId,
                                              @RequestBody AuthorUpdateDTO dto) {

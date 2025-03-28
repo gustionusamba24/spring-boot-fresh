@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -60,10 +62,19 @@ public class AuthorServiceImpl implements AuthorService {
     public void updateAuthor(String authorId, AuthorUpdateDTO dto) {
         Author author = authorRepository.findBySecureId(authorId)
                 .orElseThrow(() -> new BadRequestException("Invalid author ID"));
+        Map<Long, Address> addressMap = author.getAddresses().stream()
+                .collect(Collectors.toMap(Address::getId, Function.identity()));
+        List<Address> addresses = dto.getAddresses().stream().map(a -> {
+            Address address = addressMap.get(a.getAddressId());
+            address.setStreetName(a.getStreetName());
+            address.setCityName(a.getCityName());
+            address.setZipCode(a.getZipCode());
+            return address;
+        }).collect(Collectors.toList());
         author.setName(dto.getAuthorName() == null ? author.getName() : dto.getAuthorName());
         author.setBirthDate(
                 dto.getBirthDate() == null ? author.getBirthDate() : LocalDate.ofEpochDay(dto.getBirthDate()));
-
+        author.setAddresses(addresses);
         authorRepository.save(author);
     }
 
