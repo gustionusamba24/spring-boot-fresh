@@ -1,8 +1,6 @@
 package com.gustionusamba.bookcatalog.web;
 
-import com.gustionusamba.bookcatalog.dto.BookCreateDTO;
-import com.gustionusamba.bookcatalog.dto.BookDetailDTO;
-import com.gustionusamba.bookcatalog.dto.BookUpdateDTO;
+import com.gustionusamba.bookcatalog.dto.*;
 import com.gustionusamba.bookcatalog.service.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +26,19 @@ public class BookResource {
     public ResponseEntity<Void> createANewBook(@RequestBody BookCreateDTO dto) {
         bookService.createNewBook(dto);
         return ResponseEntity.created(URI.create("/book")).build();
+    }
+
+    @GetMapping("/v2/book")
+    public ResponseEntity<ResultPageResponseDTO<BookListResponseDTO>> findBookList(
+            @RequestParam(name = "page", required = true, defaultValue = "0") Integer page,
+            @RequestParam(name = "limit", required = true, defaultValue = "10") Integer limit,
+            @RequestParam(name = "sortBy", required = true, defaultValue = "title") String sortBy,
+            @RequestParam(name = "direction", required = true, defaultValue = "asc") String direction,
+            @RequestParam(name = "bookTitle", required = false, defaultValue = "") String bookTitle,
+            @RequestParam(name = "publisherName", required = false, defaultValue = "") String publisherName,
+            @RequestParam(name = "authorName", required = false, defaultValue = "") String authorName
+    ) {
+        return ResponseEntity.ok().body(bookService.findBookList(page, limit, sortBy, direction, bookTitle, publisherName, authorName));
     }
 
     @GetMapping("/v1/book")

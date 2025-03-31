@@ -1,8 +1,6 @@
 package com.gustionusamba.bookcatalog.service;
 
-import com.gustionusamba.bookcatalog.dto.BookCreateDTO;
-import com.gustionusamba.bookcatalog.dto.BookDetailDTO;
-import com.gustionusamba.bookcatalog.dto.BookUpdateDTO;
+import com.gustionusamba.bookcatalog.dto.*;
 
 import java.util.List;
 
@@ -17,4 +15,7 @@ public interface BookService {
     void updateBook(Long bookId, BookUpdateDTO dto);
 
     void deleteBook(Long bookId);
+
+    ResultPageResponseDTO<BookListResponseDTO> findBookList(Integer page, Integer limit, String sortBy,
+                                                            String direction, String publisherName, String bookTitle, String authorName);
 }
