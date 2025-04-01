@@ -3,6 +3,7 @@ package com.gustionusamba.bookcatalog.service.impl;
 import com.gustionusamba.bookcatalog.domain.Address;
 import com.gustionusamba.bookcatalog.domain.Author;
 import com.gustionusamba.bookcatalog.dto.AuthorCreateDTO;
+import com.gustionusamba.bookcatalog.dto.AuthorQueryDTO;
 import com.gustionusamba.bookcatalog.dto.AuthorResponseDTO;
 import com.gustionusamba.bookcatalog.dto.AuthorUpdateDTO;
 import com.gustionusamba.bookcatalog.exception.BadRequestException;
@@ -13,6 +14,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -106,5 +109,22 @@ public class AuthorServiceImpl implements AuthorService {
             dto.setBirthDate(a.getBirthDate().toEpochDay());
             return dto;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public Map<Long, List<String>> findAuthorMaps(List<Long> bookIdList) {
+        List<AuthorQueryDTO> queryList = authorRepository.findAuthorByBookIdList(bookIdList);
+        Map<Long, List<String>> authorMap = new HashMap<>();
+        List<String> authorList;
+        for (AuthorQueryDTO q : queryList) {
+            if (!authorMap.containsKey(q.getBookId())) {
+                authorList = new ArrayList<>();
+            } else {
+                authorList = authorMap.get(q.getBookId());
+            }
+            authorList.add(q.getAuthorName());
+            authorMap.put(q.getBookId(), authorList);
+        }
+        return authorMap;
     }
 }

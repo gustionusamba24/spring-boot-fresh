@@ -24,7 +24,7 @@ public class Book extends AbstractBasedEntity {
     @Column(name = "description", nullable = true, columnDefinition = "TEXT")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
 

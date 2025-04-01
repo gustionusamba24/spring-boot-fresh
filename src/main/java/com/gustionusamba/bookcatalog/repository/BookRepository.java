@@ -1,6 +1,7 @@
 package com.gustionusamba.bookcatalog.repository;
 
 import com.gustionusamba.bookcatalog.domain.Book;
+import com.gustionusamba.bookcatalog.dto.BookQueryDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,11 +27,12 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     Optional<Book> findBySecureId(String bookId);
 
-    @Query("SELECT DISTINCT b FROM Book b "
-            + "INNER JOIN Publisher p ON p.id = b.publisher.id "
-            + "JOIN  b.authors ba "
-            + "WHERE LOWER(p.name) LIKE LOWER(CONCAT('%',:publisherName,'%')) "
-            + "AND LOWER(b.title) LIKE LOWER(CONCAT('%',:bookTitle,'%')) "
-            + "AND LOWER(ba.name) LIKE LOWER(CONCAT('%',:authorName,'%'))")
-    Page<Book> findBookList(String bookTitle, String publisherName, String authorName, Pageable pageable);
+    @Query("SELECT DISTINCT new com.gustionusamba.bookcatalog.dto.BookQueryDTO(b.id, b.secureId, b.title, b.description, p.name) " +
+            "FROM Book b " +
+            "INNER JOIN Publisher p ON p.id = b.publisher.id " +
+            "JOIN  b.authors ba " +
+            "WHERE LOWER(p.name) LIKE LOWER(CONCAT('%',:publisherName,'%')) " +
+            "AND LOWER(b.title) LIKE LOWER(CONCAT('%',:bookTitle,'%')) " +
+            "AND LOWER(ba.name) LIKE LOWER(CONCAT('%',:authorName,'%'))")
+    Page<BookQueryDTO> findBookList(String bookTitle, String publisherName, String authorName, Pageable pageable);
 }

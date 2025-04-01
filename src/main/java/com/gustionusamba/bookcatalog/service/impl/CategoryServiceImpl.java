@@ -3,6 +3,7 @@ package com.gustionusamba.bookcatalog.service.impl;
 import com.gustionusamba.bookcatalog.domain.Category;
 import com.gustionusamba.bookcatalog.dto.CategoryCreateUpdateDTO;
 import com.gustionusamba.bookcatalog.dto.CategoryListResponseDTO;
+import com.gustionusamba.bookcatalog.dto.CategoryQueryDTO;
 import com.gustionusamba.bookcatalog.dto.ResultPageResponseDTO;
 import com.gustionusamba.bookcatalog.exception.BadRequestException;
 import com.gustionusamba.bookcatalog.repository.CategoryRepository;
@@ -16,7 +17,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -70,5 +74,22 @@ public class CategoryServiceImpl implements CategoryService {
             dto.setDescription(c.getDescription());
             return dto;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public Map<Long, List<String>> findCategoriesMap(List<Long> bookIdList) {
+        List<CategoryQueryDTO> queryList = categoryRepository.findCategoryByBookIdList(bookIdList);
+        Map<Long, List<String>> categoryMaps = new HashMap<>();
+        List<String> categoryCodeList;
+        for (CategoryQueryDTO q : queryList) {
+            if (!categoryMaps.containsKey(q.getBookId())) {
+                categoryCodeList = new ArrayList<>();
+            } else {
+                categoryCodeList = categoryMaps.get(q.getBookId());
+            }
+            categoryCodeList.add(q.getCategoryCode());
+            categoryMaps.put(q.getBookId(), categoryCodeList);
+        }
+        return categoryMaps;
     }
 }
