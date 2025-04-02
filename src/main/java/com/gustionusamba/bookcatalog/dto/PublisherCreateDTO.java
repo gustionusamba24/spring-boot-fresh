@@ -16,10 +16,10 @@ public class PublisherCreateDTO implements Serializable {
     @Serial
     private static final long serialVersionUID = 4187966152847548820L;
 
-    @NotBlank
+    @NotBlank(message = "publisher name must not be blank")
     private String publisherName;
 
-    @NotBlank
+    @NotBlank(message = "company name must not be blank")
     private String companyName;
 
     private String address;
