@@ -1,6 +1,6 @@
 package com.gustionusamba.bookcatalog.web;
 
-import com.gustionusamba.bookcatalog.dto.CategoryCreateUpdateDTO;
+import com.gustionusamba.bookcatalog.dto.CategoryCreateUpdateRecordDTO;
 import com.gustionusamba.bookcatalog.dto.CategoryListResponseDTO;
 import com.gustionusamba.bookcatalog.dto.ResultPageResponseDTO;
 import com.gustionusamba.bookcatalog.service.CategoryService;
@@ -19,7 +19,7 @@ public class CategoryResource {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/v1/category")
-    public ResponseEntity<Void> createAndUpdateCategory(@RequestBody CategoryCreateUpdateDTO dto) {
+    public ResponseEntity<Void> createAndUpdateCategory(@RequestBody CategoryCreateUpdateRecordDTO dto) {
         categoryService.createAndUpdateCategory(dto);
         return ResponseEntity.created(URI.create("/v1/category")).build();
     }

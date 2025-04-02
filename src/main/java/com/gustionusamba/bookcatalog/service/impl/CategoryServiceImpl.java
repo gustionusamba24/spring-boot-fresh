@@ -1,10 +1,7 @@
 package com.gustionusamba.bookcatalog.service.impl;
 
 import com.gustionusamba.bookcatalog.domain.Category;
-import com.gustionusamba.bookcatalog.dto.CategoryCreateUpdateDTO;
-import com.gustionusamba.bookcatalog.dto.CategoryListResponseDTO;
-import com.gustionusamba.bookcatalog.dto.CategoryQueryDTO;
-import com.gustionusamba.bookcatalog.dto.ResultPageResponseDTO;
+import com.gustionusamba.bookcatalog.dto.*;
 import com.gustionusamba.bookcatalog.exception.BadRequestException;
 import com.gustionusamba.bookcatalog.repository.CategoryRepository;
 import com.gustionusamba.bookcatalog.service.CategoryService;
@@ -30,13 +27,13 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public void createAndUpdateCategory(CategoryCreateUpdateDTO dto) {
-        Category category = categoryRepository.findByCode(dto.getCode().toLowerCase()).orElse(new Category());
+    public void createAndUpdateCategory(CategoryCreateUpdateRecordDTO dto) {
+        Category category = categoryRepository.findByCode(dto.code().toLowerCase()).orElse(new Category());
         if (category.getCode() == null) {
-            category.setCode(dto.getCode().toLowerCase()); // new
+            category.setCode(dto.code().toLowerCase()); // new
         }
-        category.setName(dto.getName());
-        category.setDescription(dto.getDescription());
+        category.setName(dto.name());
+        category.setDescription(dto.description());
 
         categoryRepository.save(category);
     }
