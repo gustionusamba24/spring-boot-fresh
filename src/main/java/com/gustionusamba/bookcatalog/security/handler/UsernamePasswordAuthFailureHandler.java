@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @AllArgsConstructor
-public class UsernamePasswordFailureHandler implements AuthenticationFailureHandler {
+public class UsernamePasswordAuthFailureHandler implements AuthenticationFailureHandler {
 
     private final ObjectMapper objectMapper;
 
