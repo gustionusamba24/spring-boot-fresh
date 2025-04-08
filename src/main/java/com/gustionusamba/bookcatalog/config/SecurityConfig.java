@@ -5,6 +5,7 @@ import com.gustionusamba.bookcatalog.filter.UsernamePasswordAuthProcessingFilter
 import com.gustionusamba.bookcatalog.security.handler.UsernamePasswordAuthFailureHandler;
 import com.gustionusamba.bookcatalog.security.handler.UsernamePasswordAuthSuccessHandler;
 import com.gustionusamba.bookcatalog.security.provider.UsernamePasswordAuthProvider;
+import com.gustionusamba.bookcatalog.security.util.JWTTokenFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,8 +34,8 @@ public class SecurityConfig {
     private UsernamePasswordAuthProvider usernamePasswordAuthProvider;
 
     @Bean
-    public AuthenticationSuccessHandler usernamePasswordAuthSuccessHandler(ObjectMapper objectMapper) {
-        return new UsernamePasswordAuthSuccessHandler(objectMapper);
+    public AuthenticationSuccessHandler usernamePasswordAuthSuccessHandler(ObjectMapper objectMapper, JWTTokenFactory jwtTokenFactory) {
+        return new UsernamePasswordAuthSuccessHandler(objectMapper, jwtTokenFactory);
     }
 
     @Bean
