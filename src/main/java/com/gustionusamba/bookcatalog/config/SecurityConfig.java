@@ -28,7 +28,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-    private final static String AUTH_URL = "/v1/login";
+    private static final String AUTH_URL = "/v1/login";
 
     @Autowired
     private UsernamePasswordAuthProvider usernamePasswordAuthProvider;
